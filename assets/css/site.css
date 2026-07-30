@@ -1,3 +1,14 @@
+/*
+  Stylesheet map
+  1. Design tokens and global defaults
+  2. Header and profile
+  3. Research and projects
+  4. Footer
+  5. Responsive, reduced-motion, and print rules
+
+  For simple visual changes, start with these custom properties. Rules later in
+  the file use them consistently across the page.
+*/
 :root {
   --ink: #17202b;
   --muted: #5e6874;
@@ -5,12 +16,13 @@
   --surface: #ffffff;
   --accent: #9b2f36;
   --accent-dark: #712127;
-  --accent-soft: #f4e7e5;
   --line: #dcd8d0;
   --shadow: 0 20px 55px rgba(31, 39, 48, 0.09);
   --serif: Georgia, "Times New Roman", serif;
   --sans: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
+
+/* Global defaults and link behavior. */
 * {
   box-sizing: border-box;
 }
@@ -46,6 +58,7 @@ a:focus-visible {
   border-radius: 2px;
 }
 
+/* Keyboard-only shortcut that becomes visible when focused. */
 .skip-link {
   position: fixed;
   top: 0.75rem;
@@ -61,6 +74,7 @@ a:focus-visible {
   transform: translateY(0);
 }
 
+/* Sticky header and primary navigation. */
 .site-header {
   position: sticky;
   top: 0;
@@ -125,6 +139,7 @@ footer {
   margin-inline: auto;
 }
 
+/* Profile hero: biography on the left and portrait on the right. */
 .hero {
   display: grid;
   grid-template-columns: minmax(0, 1.55fr) minmax(280px, 0.75fr);
@@ -160,7 +175,7 @@ h3 {
 h1 {
   max-width: 13ch;
   margin: 0;
-  font-size: clamp(3rem, 6.5vw, 5.7rem);
+  font-size: clamp(1.5rem, 3.25vw, 2.85rem);
   font-weight: 500;
   letter-spacing: -0.045em;
   line-height: 0.97;
@@ -290,6 +305,7 @@ h1 {
   box-shadow: var(--shadow);
 }
 
+/* Working papers and the research-section heading. */
 .research-section {
   padding: clamp(5rem, 8vw, 8rem) 0;
   border-top: 1px solid var(--line);
@@ -309,12 +325,17 @@ h1 {
 .section-heading h2 {
   grid-column: 1;
   margin: 0;
-  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-size: clamp(1.25rem, 2.5vw, 2.25rem);
   font-weight: 500;
   letter-spacing: -0.04em;
   line-height: 1;
 }
 
+#research-heading {
+  white-space: nowrap;
+}
+
+/* The optional summary paragraph must be the final element inside .section-heading. */
 .section-heading > p:last-child {
   grid-column: 2;
   grid-row: 1 / span 2;
@@ -336,11 +357,12 @@ h1 {
   background: rgba(255, 255, 255, 0.72);
 }
 
+/* Add class="paper featured" in the HTML to highlight one primary paper. */
 .paper.featured {
-  border: 0;
+  border: 1px solid var(--line);
   border-left: 5px solid var(--accent);
-  background: var(--ink);
-  color: white;
+  background: var(--surface);
+  color: var(--ink);
   box-shadow: var(--shadow);
 }
 
@@ -363,7 +385,7 @@ h1 {
 }
 
 .featured .paper-status {
-  color: #efb7b5;
+  color: var(--accent-dark);
 }
 
 .coauthors {
@@ -387,9 +409,12 @@ h1 {
   color: #3d4650;
 }
 
-.featured .abstract-label,
+.featured .abstract-label {
+  color: var(--muted);
+}
+
 .featured .abstract {
-  color: #dce1e7;
+  color: #3d4650;
 }
 
 .paper-links {
@@ -405,6 +430,7 @@ h1 {
   text-transform: uppercase;
 }
 
+/* Work-in-progress project list. */
 .work-in-progress {
   margin-top: clamp(5rem, 9vw, 8rem);
 }
@@ -415,7 +441,7 @@ h1 {
 }
 
 .section-heading.compact h2 {
-  font-size: clamp(2.3rem, 4vw, 3.5rem);
+  font-size: clamp(1.15rem, 2vw, 1.75rem);
 }
 
 .project {
@@ -445,6 +471,7 @@ h1 {
   font-size: 0.91rem;
 }
 
+/* Contact footer. */
 footer {
   display: flex;
   justify-content: space-between;
@@ -472,6 +499,7 @@ footer p {
   align-items: flex-end;
 }
 
+/* Stack multi-column sections and simplify navigation on narrower screens. */
 @media (max-width: 780px) {
   .header-inner,
   main,
@@ -499,7 +527,7 @@ footer p {
   }
 
   h1 {
-    font-size: clamp(3.2rem, 14vw, 5rem);
+    font-size: clamp(1.6rem, 7vw, 2.5rem);
   }
 
   .section-heading,
@@ -518,6 +546,7 @@ footer p {
   }
 }
 
+/* Additional controls for phone-sized screens. */
 @media (max-width: 520px) {
   nav a:nth-child(3) {
     display: none;
@@ -544,12 +573,14 @@ footer p {
   }
 }
 
+/* Respect operating-system accessibility preferences. */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
 }
 
+/* Remove navigation and decorative treatments from printed pages. */
 @media print {
   body {
     background: white;
